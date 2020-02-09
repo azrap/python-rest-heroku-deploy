@@ -7,7 +7,7 @@ from resources.item import Item, ItemList
 from resources.store import Store, StoreList
 from security import authenticate, identity
 from datetime import timedelta
-from db import db
+
 
 app = Flask(__name__)
 # To allow flask propagating exception even if debug is set to false on app
@@ -20,9 +20,10 @@ app.secret_key = 'jose'
 api = Api(app)
 
 # this will get run before the first ever request and will create all the tables that don't exist
-@app.before_first_request
-def create_tables():
-    db.create_all()
+# uncomment when running from commandline?
+# @app.before_first_request
+# def create_tables():
+#     db.create_all()
 
 
 # if we don't specify the below, it defaults to /auth as endpoint for login
@@ -46,5 +47,6 @@ api.add_resource(UserRegister, '/register')
 # this allows you to run it from the terminal.
 # need the run.py file if you want to run it from heroku etc
 if __name__ == '__main__':
+    from db import db
     db.init_app(app)
     app.run(port=5000, debug=True)  # important to mention debug=True
