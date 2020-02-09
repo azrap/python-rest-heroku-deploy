@@ -43,8 +43,8 @@ api.add_resource(ItemList, '/items')
 api.add_resource(UserRegister, '/register')
 
 
-# only the file that you run is supposed to be main
-# if you don't put main, that means it's imported and we don't want to run it
+# this allows you to run it from the terminal.
+# need the run.py file if you want to run it from heroku etc
 if __name__ == '__main__':
     db.init_app(app)
     app.run(port=5000, debug=True)  # important to mention debug=True
